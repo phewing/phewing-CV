@@ -1,0 +1,585 @@
+% Author: Phillip Hampton Ewing, Jr.
+% Email: phewing@alum.mit.edu
+% Website: www.phillipewing.com
+
+% --------------------------------------------------------------------------- %
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{phewing-cv}[CV LaTeX Styles of Phillip Ewing]
+
+\RequirePackage{afterpage}
+\RequirePackage{amssymb}
+\RequirePackage{anyfontsize}
+\RequirePackage{calc}
+\RequirePackage[inline]{enumitem}
+\RequirePackage{etoolbox}
+\RequirePackage{everyshi}
+\RequirePackage{fontspec}
+\RequirePackage{geometry}
+\RequirePackage{lastpage}
+\RequirePackage{microtype}
+\RequirePackage{needspace}
+\RequirePackage{ragged2e}
+\RequirePackage{tikz}
+\RequirePackage[explicit, pagestyles, nobottomtitles]{titlesec}
+
+% Must be imported last!
+\RequirePackage{hyperref}
+
+% --------------------------------------------------------------------------- %
+
+% Redefine existing lengths/dimensions.
+
+\setlength{\baselineskip}{13pt plus 3pt minus 1.5pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip plus 3pt minus 1.5pt}
+\setlength{\topskip}{1ex}
+
+\renewcommand{\baselinestretch}{1.08333333}
+
+% --------------------------------------------------------------------------- %
+
+% Define new lengths/dimensions.
+
+\newlength{\BannerCapHeight}
+\newlength{\ColumnGutter}
+\newlength{\FooterHeight}
+\newlength{\FooterSeparation}
+\newlength{\FooterSkip}
+\newlength{\FirstHeaderHeight}
+\newlength{\FirstHeaderSeparation}
+\newlength{\NextHeaderHeight}
+\newlength{\NextHeaderSeparation}
+\newlength{\PrimaryMargin}
+\newlength{\SecondaryMargin}
+\newlength{\SectBoxOffset}
+\newlength{\SectBoxWidth}
+
+
+% Independent new lengths/dimensions.
+
+\setlength{\BannerCapHeight}        { 12.0pt}
+\setlength{\ColumnGutter}           { 13.0pt}
+\setlength{\FooterHeight}           {  8.0pt}
+\setlength{\FooterSeparation}       {  8.0pt}
+\setlength{\FooterSkip}             { 26.0pt}
+\setlength{\FirstHeaderHeight}      { 42.0pt}
+\setlength{\FirstHeaderSeparation}  { 13.0pt}
+\setlength{\NextHeaderHeight}       {  8.0pt}
+\setlength{\NextHeaderSeparation}   { 13.0pt}
+\setlength{\PrimaryMargin}          { 42.0pt}
+\setlength{\SectBoxWidth}           {110.0pt}
+
+
+% Derived new lengths/dimensions.
+
+\setlength{\SecondaryMargin}  {\PrimaryMargin + \SectBoxWidth + \ColumnGutter}
+\setlength{\SectBoxOffset}    {\SectBoxWidth + \ColumnGutter}
+
+% --------------------------------------------------------------------------- %
+
+% Define and save geometry for first page.
+
+\geometry{
+  letterpaper, nomarginpar,
+  includehead, includefoot,
+  top = \PrimaryMargin, bottom = \PrimaryMargin,
+  left = \SecondaryMargin, right = \PrimaryMargin,
+  headheight = \FirstHeaderHeight, headsep = \FirstHeaderSeparation,
+  footskip = \FooterSkip
+}
+
+\savegeometry{firstpage}
+
+
+% Define and save geometry for next page(s).
+
+\geometry{
+  letterpaper, nomarginpar,
+  includehead, includefoot,
+  top = \PrimaryMargin, bottom = \PrimaryMargin,
+  left = \SecondaryMargin, right = \PrimaryMargin,
+  headheight = \NextHeaderHeight, headsep = \NextHeaderSeparation,
+  footskip = \FooterSkip
+}
+
+\savegeometry{nextpage}
+
+% --------------------------------------------------------------------------- %
+
+% Load the body text fonts (EB Garamond).
+
+\setmainfont{EBGaramond12-Regular}[
+  UprightFeatures = {
+    SizeFeatures = {
+      {
+        Size = -9,
+        Font = EBGaramond08-Regular
+      },
+      {
+        Size = 9-,
+        Font = EBGaramond12-Regular
+      }
+    }
+  },
+  ItalicFeatures = {
+    SizeFeatures = {
+      {
+        Size = -9,
+        Font = EBGaramond08-Italic,
+      },
+      {
+        Size = 9-,
+        Font = EBGaramond12-Italic,
+      }
+    }
+  },
+  SmallCapsFeatures = {
+    SizeFeatures = {
+      {
+        Size = -9,
+        Font = EBGaramondSC08-Regular,
+      },
+      {
+        Size = 9-,
+        Font = EBGaramondSC12-Regular,
+      }
+    },
+    Letters = SmallCaps,
+    WordSpace = 1.025,
+    LetterSpace = 2.5
+  },
+  Ligatures   = {Contextual, Historic, Discretionary},
+  Numbers     = OldStyle,
+  Contextuals = Swash
+]
+
+% --------------------------------------------------------------------------- %
+
+% Load the sans-serif fonts (Jost*).
+
+\newfontface\josthairline{Jost-Hairline}[
+  BoldFont       = Jost-Thin,
+  ItalicFont     = Jost-HairlineItalic,
+  BoldItalicFont = Jost-ThinItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostthin{Jost-Thin}[
+  BoldFont       = Jost-Light,
+  ItalicFont     = Jost-ThinItalic,
+  BoldItalicFont = Jost-LightItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostlight{Jost-Light}[
+  BoldFont       = Jost-Book,
+  ItalicFont     = Jost-LightItalic,
+  BoldItalicFont = Jost-BookItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostbook{Jost-Book}[
+  BoldFont       = Jost-Medium,
+  ItalicFont     = Jost-BookItalic,
+  BoldItalicFont = Jost-MediumItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostmedium{Jost-Medium}[
+  BoldFont       = Jost-Semi,
+  ItalicFont     = Jost-MediumItalic,
+  BoldItalicFont = Jost-SemiItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostsemi{Jost-Semi}[
+  BoldFont       = Jost-Bold,
+  ItalicFont     = Jost-SemiItalic,
+  BoldItalicFont = Jost-BoldItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostbold{Jost-Bold}[
+  BoldFont       = Jost-Heavy,
+  ItalicFont     = Jost-BoldItalic,
+  BoldItalicFont = Jost-HeavyItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostheavy{Jost-Heavy}[
+  BoldFont       = Jost-Black,
+  ItalicFont     = Jost-HeavyItalic,
+  BoldItalicFont = Jost-BlackItalic,
+  Scale          = MatchLowercase
+]
+
+\newfontface\jostblack{Jost-Black}[
+  BoldFont       = Jost-Black,
+  ItalicFont     = Jost-BlackItalic,
+  BoldItalicFont = Jost-BlackItalic,
+  Scale          = MatchLowercase
+]
+
+% --------------------------------------------------------------------------- %
+
+% Hyperlink setup.
+
+\hypersetup{%
+  allcolors={0 0 0},
+  breaklinks=true,
+  colorlinks=true,
+  urlcolor=black
+}
+
+\urlstyle{same}
+
+% --------------------------------------------------------------------------- %
+
+% Special symbols/marks.
+
+\newcommand{\AdjSectSpace}{%
+  \hfill%
+  \vspace{-24pt}%
+}
+
+\newcommand{\DotSep}[1]{%
+  {\hspace{#1}\hspace{#1}$\cdot$\hspace{#1}}%
+}
+
+\newcommand{\PageCount}{%
+  \infty%
+}
+
+\newcommand{\Slash}[1]{%
+  \parbox[t]{#1}{%
+    \begin{tikzpicture}%
+      \draw[line width=0.5pt] (0,#1) -- (#1,0);%
+    \end{tikzpicture}%
+  }%
+}
+
+\newcommand{\SlashSep}[2]{%
+  \hspace{#2}\Slash{#1}\hspace{#2}%
+}
+
+\newcommand{\UDot}[1]{%
+  \tikz[baseline=(todotted.base)]{%
+    \node[inner sep=-1pt,outer sep=0pt] (todotted) {#1};%
+    \draw[densely dotted] (todotted.south west) -- (todotted.south east);%
+  }%
+}%
+
+\newcommand{\ThisPage}{%
+  $\overrightarrow{\textbf{P}_\thepage}\in\mathbb{Z}^\PageCount$
+}
+
+% --------------------------------------------------------------------------- %
+
+% Text styles.
+
+\newcommand{\A}[1]{%
+  \textsc{\MakeLowercase{#1}}%
+}
+
+\newcommand{\BannerText}[1]{%
+  {%
+    \jostmedium%
+    \fontsize{\BannerCapHeight}{26pt}\selectfont #1%
+  }%
+}
+
+\newcommand{\BannerCapsText}[1]{%
+  \BannerText{%
+    \addfontfeatures{%
+      UprightFeatures = {%
+        WordSpace = 1.1,
+        LetterSpace = 10.0
+      }%
+    }%
+    \MakeUppercase{#1}%
+  }%
+}
+
+\newcommand{\ExpURL}[1]{%
+  \UDot{\textit{\url{#1}}}%
+}
+
+\newcommand{\Foreign}[1]{%
+  \textit{#1}%
+}
+
+\newcommand{\ImpURL}[2]{%
+  \UDot{\textit{\href{#1}{#2}}}%
+}
+
+\newcommand{\LN}[1]{
+  \addfontfeatures{Numbers = Lining}%
+  #1%
+  \addfontfeatures{Numbers = OldStyle}%
+}
+
+\newcommand{\Ord}[1]{%
+  \textsuperscript{#1}%
+}
+
+\newcommand{\ProperPub}[1]{%
+  \textit{#1}%
+}
+
+\newcommand{\Sub}[1]{%
+  \textsubscript{#1}%
+}
+
+\newcommand{\Sup}[1]{%
+  \textsuperscript{#1}%
+}
+
+\newcommand{\Topic}[1]{%
+  {\textsc{\MakeLowercase{#1}}}%
+}
+
+% --------------------------------------------------------------------------- %
+
+% Define some macros for CV title (banner) and headers on next page(s).
+
+\newcommand{\FirstName}{First}
+\newcommand{\MiddleName}{Middle}
+\newcommand{\LastName}{Last}
+\newcommand{\NameSuffix}{Sfx.}
+\newcommand{\PhoneNumber}{+1.000.000.0000}
+\newcommand{\Email}{email@provider.com}
+\newcommand{\Website}{www.mywebsite.com}
+
+% --------------------------------------------------------------------------- %
+
+% Define commands for making the first page CV title (banner).
+
+\newcommand{\BannerMakeName}{%
+  \hspace{-\SectBoxOffset}%
+  \parbox[b][\FirstHeaderHeight][t]{\SectBoxWidth}{%
+    \BannerCapsText{\FirstName}%
+    \vfill%
+    \BannerCapsText{\MiddleName}%
+    \vfill%
+    \BannerCapsText{\LastName},%
+    \ \ \BannerCapsText{\NameSuffix}%
+  }%
+}
+
+\newcommand{\BannerMakeNameSlash}{%
+  \BannerMakeName%
+  \llap{\Slash{\PrimaryMargin}}%
+  \hspace{\ColumnGutter}%
+}
+
+\newcommand{\BannerMakeInfo}{%
+  \parbox[b][\FirstHeaderHeight][b]{\SectBoxWidth}{%
+    \raggedleft%
+    \BannerText{\PhoneNumber}%
+    \vfill%
+    \BannerText{\Email}%
+    \vfill%
+    \BannerText{\Website}%
+  }%
+}
+
+\newpagestyle{firstpage}{%
+% \loadgeometry{firstpage}%
+  \sethead%
+    {\BannerMakeNameSlash}{}{\BannerMakeInfo}%
+  \setfoot%
+    {}%
+    {\ThisPage}%
+    {}%
+}
+
+% --------------------------------------------------------------------------- %
+
+% Define commands for making the next-page CV header.
+
+\newcommand{\NextPgMakeName}{%
+  \hspace{-\SectBoxOffset}%
+  \parbox[b][\NextHeaderHeight][b]{\SectBoxWidth}{%
+    \BannerCapsText{\FirstName\ \LastName}%
+  }%
+  \hspace{\ColumnGutter}%
+}
+
+\newcommand{\NextPgMakeLHd}{%
+  \NextPgMakeName%
+  \BannerText{\PhoneNumber}%
+}
+
+\newcommand{\NextPgMakeCHd}{%
+  \BannerText{\Email}%
+}
+
+\newcommand{\NextPgMakeRHd}{%
+  \BannerText{\Website}%
+}
+
+\newpagestyle{nextpage}{%
+  \loadgeometry{nextpage}%
+  \sethead%
+    {\NextPgMakeLHd}%
+    {\NextPgMakeCHd}%
+    {\NextPgMakeRHd}%
+  \setfoot%
+    {}%
+    {\ThisPage}%
+    {}%
+}
+
+% --------------------------------------------------------------------------- %
+
+\let\@section@title@\relax%
+
+\newif\ifsuppress
+
+\titleformat{\section}[leftmargin]%   Command, Shape
+  {%                                  Format
+    \titlerule[0.25pt]%
+    \jostmedium%
+    \addfontfeatures{%
+      UprightFeatures = {%
+        WordSpace = 1.075,%
+        LetterSpace = 7.5%
+      }%
+    }%
+  }%
+  {\thesection}%                      Label
+  {0em}%                              Sep.
+  {%                                  Before-Code
+    \let\@section@title@\relax%
+    {%
+      \parbox[t][0pt][t]{\SectBoxWidth}{%
+        \RaggedRight\MakeUppercase{#1}%
+      }%
+      \hfill%
+      \suppressfalse%
+    }%
+    \gdef\@section@title@{%
+      \parbox[t][0pt][t]{\SectBoxWidth}{%
+        \jostmedium%
+        \addfontfeatures{%
+          UprightFeatures = {%
+            WordSpace = 1.075,%
+            LetterSpace = 7.5%
+          }%
+        }%
+        \RaggedRight\MakeUppercase{#1 (continued)}%
+        \hfill%
+        \vspace{-12pt}%
+      }%
+      \hfill%
+      \vspace{-12pt}%
+    }%
+  }%
+  [\suppressfalse]%                   After-Code
+
+\titlespacing{\section}%
+  {\SectBoxWidth}%
+  {1em}%
+  {\ColumnGutter}%
+
+\def\print@section@title@{%
+  \raggedright%
+  \hspace{-\SectBoxOffset}%
+  \vspace{2pt}%
+  \titlerule[0.25pt]\\%
+  \hspace{-\SectBoxOffset}%
+  \@section@title@%
+  \hfill%
+  \vspace{-10pt}%
+}
+
+\EveryShipout{%
+  \ifdim\pagetotal>\pagegoal%
+    \unless\ifsuppress%
+      \aftergroup\print@section@title@%
+    \fi%
+  \fi%
+}
+
+% --------------------------------------------------------------------------- %
+
+% Define subsection format.
+
+\titleformat{\subsection}[hang]%  Command, Shape
+  {\jostmedium}%                  Format
+  {\thesubsection}%               Label
+  {0em}%                          Sep.
+  {#1}%                           Before-Code
+  []%                             After-Code
+
+
+\titlespacing{\subsection}%
+  { 0.0em}%
+  { 0.5em}%
+  {-0.5em}%
+
+% --------------------------------------------------------------------------- %
+
+% Define sub-subsection format.
+
+\titleformat{\subsubsection}[hang]%
+  {\jostbook}%
+  {\thesubsection}%
+  {0em}%
+  {#1}%
+  []%
+
+\titlespacing{\subsubsection}%
+  { 0.0em}%
+  { 0.0em}%
+  {-1.0em}%
+
+% --------------------------------------------------------------------------- %
+
+% Define paragraph with topic format.
+
+\titleformat{\paragraph}[runin]%
+  {}%
+  {\theparagraph}%
+  {0em}%
+  {\textsc{#1}\textnormal:\kern-0.5em}%
+  []%
+
+\titlespacing{\subsubsection}%
+  {0em}%
+  {0em}%
+  {0em}%
+
+% --------------------------------------------------------------------------- %
+
+% (Re-)Define a style for topic entries outside of paragraph mode.
+
+\newcommand{\TopicEntry}[1]{%
+  \Topic{#1}\DotSep{0.25em}%
+}
+
+% --------------------------------------------------------------------------- %
+
+% Wrapping things up...
+
+\pagestyle{nextpage}
+
+\newcommand{\StartCV}{%
+  \clearpage%
+  \thispagestyle{firstpage}%
+  \afterpage{%
+    \loadgeometry{nextpage}%
+    \thispagestyle{nextpage}%
+  }%
+  \hfill%
+  \vspace{21pt}%
+}
+
+% --------------------------------------------------------------------------- %
+
+% ...Done.
+
+\endinput
+
+% --------------------------------------------------------------------------- %
