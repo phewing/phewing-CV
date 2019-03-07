@@ -41,7 +41,7 @@ options are listed below:
   [proTeXt](http://www.tug.org/protext/), [TeX
   Live](https://www.tug.org/texlive/)
 + __MacOS:__ [MacTeX](http://www.tug.org/mactex/)
-+ __Linux:__ [TeX Live](ttps://www.tug.org/texlive/)
++ __Linux:__ [TeX Live](https://www.tug.org/texlive/)
 + __(Online):__ [Overleaf](https://www.overleaf.com/),
   [Papeeria](https://papeeria.com/), [Datazar](https://www.datazar.com/),
   [LaTeX Base](https://latexbase.com/)
