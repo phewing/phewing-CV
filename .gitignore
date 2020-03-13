@@ -243,3 +243,6 @@ TSWLatexianTemp*
 
 # MacOS-specific junk
 *.DS_Store
+
+# ---
+phone-number.txt
